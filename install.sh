@@ -6,8 +6,13 @@ if [ ! "$(command -v unzip)" ]; then
   exit 1
 fi
 
+if [ ! "$(command -v wget)" ]; then
+  echo 'wget is required but was not found. Install wget first and then run this script again.' >&2
+  exit 1
+fi
+
 _fetch_sources(){
-  wget -O /tmp/nanorc.zip https://github.com/scopatz/nanorc/archive/master.zip
+  wget --no-check-certificate -O /tmp/nanorc.zip https://github.com/scopatz/nanorc/archive/master.zip
   mkdir -p ~/.nano/
 
   cd ~/.nano/ || exit
